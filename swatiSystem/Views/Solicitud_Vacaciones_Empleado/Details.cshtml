@@ -1,0 +1,67 @@
+﻿@model swatiSystem.Solicitud_Vacaciones_Empleado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Solicitud_Vacaciones_Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Dias_De_Vacaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dias_De_Vacaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vacaciones_Pagadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vacaciones_Pagadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Aplicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Aplicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualizadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualizadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado.Codigo_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado.Codigo_Empleado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

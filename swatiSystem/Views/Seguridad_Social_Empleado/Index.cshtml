@@ -1,0 +1,70 @@
+﻿@model IEnumerable<swatiSystem.Seguridad_Social_Empleado>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Deduccion_Base)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deduccion_IR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pago_Patronal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_Aplicacion_Impuesto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreadoEn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualizadoEn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empleado.Codigo_Empleado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deduccion_Base)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deduccion_IR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pago_Patronal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_Aplicacion_Impuesto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreadoEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualizadoEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empleado.Codigo_Empleado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

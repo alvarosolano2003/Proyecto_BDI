@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="swatiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Antiguedad_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Concepto" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Limite_Antiguedad" Type="int" Nullable="false" />
+          <Property Name="Porcentage" Type="float" Nullable="false" />
+          <Property Name="CreadoEn" Type="datetime" Nullable="false" />
+          <Property Name="ActualizadoEn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cargo_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Salario" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Codigo_Empleado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cedula_Identidad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Codigo_Inss" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Salario_Bruto" Type="money" Nullable="false" />
+          <Property Name="Vacaciones_Acumulados" Type="int" Nullable="false" />
+          <Property Name="Cargo_Empleado_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Antiguedad_Empleado_Id" Type="uniqueidentifier" />
+          <Property Name="CreadoEn" Type="datetime" Nullable="false" />
+          <Property Name="ActualizadoEn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Horas_Extras_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Pago_Por_Hora" Type="float" Nullable="false" />
+          <Property Name="Concepto" Type="text" Nullable="false" />
+          <Property Name="Inicio_Laboral" Type="datetime" Nullable="false" />
+          <Property Name="Finalizacion_Laboral" Type="datetime" />
+          <Property Name="Fecha_Laboral" Type="date" Nullable="false" />
+          <Property Name="Empleado_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreadoEn" Type="datetime" Nullable="false" />
+          <Property Name="ActualizadoEn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Seguridad_Social_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Deduccion_Base" Type="money" Nullable="false" />
+          <Property Name="Deduccion_IR" Type="money" Nullable="false" />
+          <Property Name="Pago_Patronal" Type="money" Nullable="false" />
+          <Property Name="Fecha_Aplicacion_Impuesto" Type="date" Nullable="false" />
+          <Property Name="Empleado_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreadoEn" Type="datetime" Nullable="false" />
+          <Property Name="ActualizadoEn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Solicitud_Vacaciones_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Dias_De_Vacaciones" Type="int" Nullable="false" />
+          <Property Name="Vacaciones_Pagadas" Type="money" Nullable="false" />
+          <Property Name="Fecha_Aplicacion" Type="date" Nullable="false" />
+          <Property Name="Empleado_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreadoEn" Type="datetime" Nullable="false" />
+          <Property Name="ActualizadoEn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Antiguedad_Empleado_Id">
+          <End Role="Antiguedad_Empleado" Type="Self.Antiguedad_Empleado" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Antiguedad_Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Antiguedad_Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Cargo_Empleado_Id">
+          <End Role="Cargo_Empleado" Type="Self.Cargo_Empleado" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo_Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Cargo_Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Id_HE_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Horas_Extras_Empleado" Type="Self.Horas_Extras_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Horas_Extras_Empleado">
+              <PropertyRef Name="Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguridad_Social_Empleado_Id">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Seguridad_Social_Empleado" Type="Self.Seguridad_Social_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seguridad_Social_Empleado">
+              <PropertyRef Name="Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Vacaciones_Empleado_Id">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Vacaciones_Empleado" Type="Self.Solicitud_Vacaciones_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitud_Vacaciones_Empleado">
+              <PropertyRef Name="Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="swatiModelStoreContainer">
+          <EntitySet Name="Antiguedad_Empleado" EntityType="Self.Antiguedad_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cargo_Empleado" EntityType="Self.Cargo_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horas_Extras_Empleado" EntityType="Self.Horas_Extras_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seguridad_Social_Empleado" EntityType="Self.Seguridad_Social_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitud_Vacaciones_Empleado" EntityType="Self.Solicitud_Vacaciones_Empleado" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Antiguedad_Empleado_Id" Association="Self.FK_Antiguedad_Empleado_Id">
+            <End Role="Antiguedad_Empleado" EntitySet="Antiguedad_Empleado" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Cargo_Empleado_Id" Association="Self.FK_Empleado_Cargo_Empleado_Id">
+            <End Role="Cargo_Empleado" EntitySet="Cargo_Empleado" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Id_HE_Empleado" Association="Self.FK_Empleado_Id_HE_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Horas_Extras_Empleado" EntitySet="Horas_Extras_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguridad_Social_Empleado_Id" Association="Self.FK_Seguridad_Social_Empleado_Id">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Seguridad_Social_Empleado" EntitySet="Seguridad_Social_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Vacaciones_Empleado_Id" Association="Self.FK_Solicitud_Vacaciones_Empleado_Id">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Solicitud_Vacaciones_Empleado" EntitySet="Solicitud_Vacaciones_Empleado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="swatiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Antiguedad_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Concepto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Limite_Antiguedad" Type="Int32" Nullable="false" />
+          <Property Name="Porcentage" Type="Double" Nullable="false" />
+          <Property Name="CreadoEn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualizadoEn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_Antiguedad_Empleado_Id" FromRole="Antiguedad_Empleado" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Cargo_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Puesto" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salario" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_Empleado_Cargo_Empleado_Id" FromRole="Cargo_Empleado" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Codigo_Empleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cedula_Identidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codigo_Inss" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salario_Bruto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Vacaciones_Acumulados" Type="Int32" Nullable="false" />
+          <Property Name="Cargo_Empleado_Id" Type="Guid" Nullable="false" />
+          <Property Name="Antiguedad_Empleado_Id" Type="Guid" />
+          <Property Name="CreadoEn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualizadoEn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Antiguedad_Empleado" Relationship="Self.FK_Antiguedad_Empleado_Id" FromRole="Empleado" ToRole="Antiguedad_Empleado" />
+          <NavigationProperty Name="Cargo_Empleado" Relationship="Self.FK_Empleado_Cargo_Empleado_Id" FromRole="Empleado" ToRole="Cargo_Empleado" />
+          <NavigationProperty Name="Horas_Extras_Empleado" Relationship="Self.FK_Empleado_Id_HE_Empleado" FromRole="Empleado" ToRole="Horas_Extras_Empleado" />
+          <NavigationProperty Name="Seguridad_Social_Empleado" Relationship="Self.FK_Seguridad_Social_Empleado_Id" FromRole="Empleado" ToRole="Seguridad_Social_Empleado" />
+          <NavigationProperty Name="Solicitud_Vacaciones_Empleado" Relationship="Self.FK_Solicitud_Vacaciones_Empleado_Id" FromRole="Empleado" ToRole="Solicitud_Vacaciones_Empleado" />
+        </EntityType>
+        <EntityType Name="Horas_Extras_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Pago_Por_Hora" Type="Double" Nullable="false" />
+          <Property Name="Concepto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Inicio_Laboral" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Finalizacion_Laboral" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Laboral" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Empleado_Id" Type="Guid" Nullable="false" />
+          <Property Name="CreadoEn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualizadoEn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Id_HE_Empleado" FromRole="Horas_Extras_Empleado" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Seguridad_Social_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Deduccion_Base" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Deduccion_IR" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Pago_Patronal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Fecha_Aplicacion_Impuesto" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Empleado_Id" Type="Guid" Nullable="false" />
+          <Property Name="CreadoEn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualizadoEn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Seguridad_Social_Empleado_Id" FromRole="Seguridad_Social_Empleado" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Solicitud_Vacaciones_Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Dias_De_Vacaciones" Type="Int32" Nullable="false" />
+          <Property Name="Vacaciones_Pagadas" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Fecha_Aplicacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Empleado_Id" Type="Guid" Nullable="false" />
+          <Property Name="CreadoEn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualizadoEn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Solicitud_Vacaciones_Empleado_Id" FromRole="Solicitud_Vacaciones_Empleado" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="FK_Antiguedad_Empleado_Id">
+          <End Role="Antiguedad_Empleado" Type="Self.Antiguedad_Empleado" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Antiguedad_Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Antiguedad_Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Cargo_Empleado_Id">
+          <End Role="Cargo_Empleado" Type="Self.Cargo_Empleado" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo_Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Cargo_Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Id_HE_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Horas_Extras_Empleado" Type="Self.Horas_Extras_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Horas_Extras_Empleado">
+              <PropertyRef Name="Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguridad_Social_Empleado_Id">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Seguridad_Social_Empleado" Type="Self.Seguridad_Social_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seguridad_Social_Empleado">
+              <PropertyRef Name="Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Vacaciones_Empleado_Id">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Vacaciones_Empleado" Type="Self.Solicitud_Vacaciones_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitud_Vacaciones_Empleado">
+              <PropertyRef Name="Empleado_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="swatiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Antiguedad_Empleado" EntityType="Self.Antiguedad_Empleado" />
+          <EntitySet Name="Cargo_Empleado" EntityType="Self.Cargo_Empleado" />
+          <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
+          <EntitySet Name="Horas_Extras_Empleado" EntityType="Self.Horas_Extras_Empleado" />
+          <EntitySet Name="Seguridad_Social_Empleado" EntityType="Self.Seguridad_Social_Empleado" />
+          <EntitySet Name="Solicitud_Vacaciones_Empleado" EntityType="Self.Solicitud_Vacaciones_Empleado" />
+          <AssociationSet Name="FK_Antiguedad_Empleado_Id" Association="Self.FK_Antiguedad_Empleado_Id">
+            <End Role="Antiguedad_Empleado" EntitySet="Antiguedad_Empleado" />
+            <End Role="Empleado" EntitySet="Empleadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Cargo_Empleado_Id" Association="Self.FK_Empleado_Cargo_Empleado_Id">
+            <End Role="Cargo_Empleado" EntitySet="Cargo_Empleado" />
+            <End Role="Empleado" EntitySet="Empleadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Id_HE_Empleado" Association="Self.FK_Empleado_Id_HE_Empleado">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Horas_Extras_Empleado" EntitySet="Horas_Extras_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguridad_Social_Empleado_Id" Association="Self.FK_Seguridad_Social_Empleado_Id">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Seguridad_Social_Empleado" EntitySet="Seguridad_Social_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Vacaciones_Empleado_Id" Association="Self.FK_Solicitud_Vacaciones_Empleado_Id">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Solicitud_Vacaciones_Empleado" EntitySet="Solicitud_Vacaciones_Empleado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="swatiModelStoreContainer" CdmEntityContainer="swatiEntities">
+          <EntitySetMapping Name="Antiguedad_Empleado">
+            <EntityTypeMapping TypeName="swatiModel.Antiguedad_Empleado">
+              <MappingFragment StoreEntitySet="Antiguedad_Empleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Limite_Antiguedad" ColumnName="Limite_Antiguedad" />
+                <ScalarProperty Name="Porcentage" ColumnName="Porcentage" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="ActualizadoEn" ColumnName="ActualizadoEn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cargo_Empleado">
+            <EntityTypeMapping TypeName="swatiModel.Cargo_Empleado">
+              <MappingFragment StoreEntitySet="Cargo_Empleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleadoes">
+            <EntityTypeMapping TypeName="swatiModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo_Empleado" ColumnName="Codigo_Empleado" />
+                <ScalarProperty Name="Cedula_Identidad" ColumnName="Cedula_Identidad" />
+                <ScalarProperty Name="Codigo_Inss" ColumnName="Codigo_Inss" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Salario_Bruto" ColumnName="Salario_Bruto" />
+                <ScalarProperty Name="Vacaciones_Acumulados" ColumnName="Vacaciones_Acumulados" />
+                <ScalarProperty Name="Cargo_Empleado_Id" ColumnName="Cargo_Empleado_Id" />
+                <ScalarProperty Name="Antiguedad_Empleado_Id" ColumnName="Antiguedad_Empleado_Id" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="ActualizadoEn" ColumnName="ActualizadoEn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horas_Extras_Empleado">
+            <EntityTypeMapping TypeName="swatiModel.Horas_Extras_Empleado">
+              <MappingFragment StoreEntitySet="Horas_Extras_Empleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Pago_Por_Hora" ColumnName="Pago_Por_Hora" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Inicio_Laboral" ColumnName="Inicio_Laboral" />
+                <ScalarProperty Name="Finalizacion_Laboral" ColumnName="Finalizacion_Laboral" />
+                <ScalarProperty Name="Fecha_Laboral" ColumnName="Fecha_Laboral" />
+                <ScalarProperty Name="Empleado_Id" ColumnName="Empleado_Id" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="ActualizadoEn" ColumnName="ActualizadoEn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguridad_Social_Empleado">
+            <EntityTypeMapping TypeName="swatiModel.Seguridad_Social_Empleado">
+              <MappingFragment StoreEntitySet="Seguridad_Social_Empleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Deduccion_Base" ColumnName="Deduccion_Base" />
+                <ScalarProperty Name="Deduccion_IR" ColumnName="Deduccion_IR" />
+                <ScalarProperty Name="Pago_Patronal" ColumnName="Pago_Patronal" />
+                <ScalarProperty Name="Fecha_Aplicacion_Impuesto" ColumnName="Fecha_Aplicacion_Impuesto" />
+                <ScalarProperty Name="Empleado_Id" ColumnName="Empleado_Id" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="ActualizadoEn" ColumnName="ActualizadoEn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitud_Vacaciones_Empleado">
+            <EntityTypeMapping TypeName="swatiModel.Solicitud_Vacaciones_Empleado">
+              <MappingFragment StoreEntitySet="Solicitud_Vacaciones_Empleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Dias_De_Vacaciones" ColumnName="Dias_De_Vacaciones" />
+                <ScalarProperty Name="Vacaciones_Pagadas" ColumnName="Vacaciones_Pagadas" />
+                <ScalarProperty Name="Fecha_Aplicacion" ColumnName="Fecha_Aplicacion" />
+                <ScalarProperty Name="Empleado_Id" ColumnName="Empleado_Id" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="ActualizadoEn" ColumnName="ActualizadoEn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

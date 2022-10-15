@@ -1,0 +1,83 @@
+﻿@model swatiSystem.Horas_Extras_Empleado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Horas_Extras_Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago_Por_Hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago_Por_Hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concepto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concepto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inicio_Laboral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inicio_Laboral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Finalizacion_Laboral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Finalizacion_Laboral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Laboral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Laboral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualizadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualizadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado.Codigo_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado.Codigo_Empleado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

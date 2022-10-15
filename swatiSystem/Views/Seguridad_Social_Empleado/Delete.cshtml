@@ -1,0 +1,81 @@
+﻿@model swatiSystem.Seguridad_Social_Empleado
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Seguridad_Social_Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Deduccion_Base)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deduccion_Base)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deduccion_IR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deduccion_IR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pago_Patronal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pago_Patronal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Aplicacion_Impuesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Aplicacion_Impuesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualizadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualizadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado.Codigo_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado.Codigo_Empleado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

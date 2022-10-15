@@ -1,0 +1,107 @@
+﻿@model swatiSystem.Empleado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo_Empleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula_Identidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula_Identidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo_Inss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo_Inss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salario_Bruto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salario_Bruto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vacaciones_Acumulados)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vacaciones_Acumulados)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualizadoEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualizadoEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Antiguedad_Empleado.Concepto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Antiguedad_Empleado.Concepto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cargo_Empleado.Puesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cargo_Empleado.Puesto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
